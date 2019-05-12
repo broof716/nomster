@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+     before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
     # A bunch of other code here
 end
 
@@ -12,50 +12,49 @@ end
   end
 
   def create
-  @place = current_user.places.create(place_params)
-  if @place.valid?
-    redirect_to root_path
-  else
-    render :new, status: :unprocessable_entity
+    @place = current_user.places.create(place_params)
+    if @place.valid?
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
-end
 
   def show
     @place = Place.find(params[:id])
   end
 
-   def edit
-  @place = Place.find(params[:id])
+  def edit
+    @place = Place.find(params[:id])
 
-  if @place.user != current_user
-    return render plain: 'Not Allowed', status: :forbidden
+    if @place.user != current_user
+      return render plain: 'Not Allowed', status: :forbidden
+    end
   end
-end
 
   def update
-  @place = Place.find(params[:id])
+    @place = Place.find(params[:id])
+    if @place.user != current_user
+      return render plain: 'Not Allowed', status: :forbidden
+    end
 
-  if @place.user != current_user
-    return render plain: 'Not Allowed', status: :forbidden
+    @place.update_attributes(place_params)
+    if @place.valid?
+      redirect_to root_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
-
-  @place.update_attributes(place_params)
-  if @place.valid?
-    redirect_to root_path
-  else
-    render :edit, status: :unprocessable_entity
-  end
-end
 
   def destroy
-  @place = Place.find(params[:id])
-  if @place.user != current_user
-    return render plain: 'Not Allowed', status: :forbidden
+    @place = Place.find(params[:id])
+    if @place.user != current_user
+      return render plain: 'Not Allowed', status: :forbidden
+    end
+    
+    @place.destroy
+    redirect_to root_path
   end
-
-  @place.destroy
-  redirect_to root_path
-end
 
   private
 
