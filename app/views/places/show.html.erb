@@ -5,11 +5,6 @@
   <p><%= @place.description %></p>
 
 
-
-  <style>
-    #map {
-    height: 300px;
-  }
   </style>
   </head>
   <body>
@@ -36,7 +31,7 @@
 
   </script>
   <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuAODuA63JagnVoKECmz4XDgeZv5bydYQ
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL6--t6z94jyzlIMEumpqZ8ANbJjbYKzc
   callback=initMap">
   </script>
 
@@ -53,16 +48,11 @@
   </div>
 </div>
 
+<div class="clear"></div>
 <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
-  <%= f.input :message %>
-  <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
-  <%= f.submit "Add a Comment", class: 'btn btn-primary' %>
 <% end %>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Add a comment
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -88,16 +78,26 @@
   </div>
 </div>
 
-<h1>Comments</h1>
+<div class="col-10 offset-1">
+  <h1 class="float-left">Comments</h1>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
+    Add a comment
+  </button>
+</div>
 
-<% @place.comments.each do |comment| %>
-  <div>
-    <blockquote>
-      <% if comment.humanized_rating.present? %>
-        <b><%= comment.humanized_rating %></b> -
-      <% end %>
-      <%= comment.message %>
-      <small><%= comment.user.email %></small>
-    </blockquote>
-  </div>
-<% end %>
+<div class="clear"></div>
+
+<div class="row">
+  <% @place.comments.each do |comment| %>
+    <div class="col-12 col-sm-6">
+      <blockquote>
+        <% if comment.humanized_rating.present? %>
+          <b><%= comment.humanized_rating %></b> -
+        <% end %>
+        <%= comment.message %>
+        <small><%= comment.user.email %></small>
+      </blockquote>
+    </div>
+  <% end %>
+</div>
