@@ -5,6 +5,9 @@
   <p><%= @place.description %></p>
 
 
+
+  <style>
+   
   </style>
   </head>
   <body>
@@ -18,7 +21,7 @@
       var myLatLng = {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>};
 
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 12,
         center: myLatLng
       });
 
@@ -28,17 +31,16 @@
         title: 'Hello World!'
       });
     }
-
   </script>
+
   <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL6--t6z94jyzlIMEumpqZ8ANbJjbYKzc
-  callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc6bNlBjr2qhUDAPTIAGp9VdyAeNYXICk&callback=initMap">
   </script>
 
-  <div id="map"></div>
-<% end %>
+    <div id="map"></div>
+  <% end %>
 
-<br />
+  <br />
 
   <div class="float-right">
     <% if current_user && current_user == @place.user %>
