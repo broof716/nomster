@@ -27,9 +27,14 @@ ActiveRecord::Schema.define(version: 2019_05_29_062015) do
   end
 
   create_table "photos", force: :cascade do |t|
+    t.text "caption"
+    t.integer "user_id"
+    t.integer "place_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
+    t.index ["place_id"], name: "index_photos_on_place_id"
+    t.index ["user_id", "place_id"], name: "index_photos_on_user_id_and_place_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -57,9 +62,6 @@ ActiveRecord::Schema.define(version: 2019_05_29_062015) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
-    t.string "photo"
-    t.string "picture"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
