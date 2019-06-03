@@ -120,7 +120,7 @@
 
           <%= f.input :caption %>
           <%= f.input :picture %>
-          
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -137,4 +137,11 @@
   <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#photoModal">
     Add a photo
   </button>
+</div>
+
+<div class="row">
+  <% @place.photos.each do |photo| %>
+    <%= image_tag photo.picture.url %>
+    <%= photo.caption %>
+  <% end %>
 </div>
