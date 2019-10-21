@@ -27,7 +27,10 @@
   </a>
 </div>
 
- 
+<br />
+<div class="text-center">
+ <%= will_paginate @places, renderer: BootstrapPagination::Rails %>
+</div>
 
 <% @places.each do |place| %>
   <div class="booyah-box col-10 offset-1">
@@ -56,4 +59,4 @@
   </div>
 <% end %>
 
-<%= will_paginate @places, renderer: BootstrapPagination::Rails %>
+

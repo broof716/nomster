@@ -4,15 +4,6 @@
   <br/><br/>
   <p><%= @place.description %></p>
 
-
-
-  <style>
-   
-  </style>
-  </head>
-  <body>
-  <div id="map"></div>
-
   <% if @place.latitude.present? && @place.longitude.present? %>
 
   <script>
@@ -28,18 +19,20 @@
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: 'Hello World!'
+        title: 'Current Location'
       });
     }
   </script>
 
   <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc6bNlBjr2qhUDAPTIAGp9VdyAeNYXICk&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCckqQcHvR1xAzGCh_v9dfXEVX5l2Vcg9w&callback=initMap">
   </script>
 
-    <div id="map"></div>
-  <% end %>
+  <div id="map"></div>
+<% end %>
 
+<br />
+<br />
   
 
   <div class="float-right">
